@@ -42,26 +42,22 @@ class App extends Component{
   }
 
   render() {
+    const list = Object.keys(this.state.league).map(iteration => {
+      return (
+        <Membre
+          key={iteration} 
+          age={this.state.league[iteration].age}
+          nom={this.state.league[iteration].nom}
+        />
+      )
+    })
+
+
     return (
       <Fragment>
         <h1>UFC</h1>
         <h3>Légende du MMA</h3>
-        <Membre 
-          nom={this.state.league.membre1.nom} 
-          age={this.state.league.membre1.age} 
-        />
-        <Membre 
-          nom={this.state.league.membre2.nom} 
-          age={this.state.league.membre2.age} 
-        />
-        <Membre 
-          nom={this.state.league.membre3.nom} 
-          age={this.state.league.membre3.age} 
-        />
-        <Membre 
-          nom={this.state.league.membre4.nom} 
-          age={this.state.league.membre4.age} 
-        />
+        {list}
         {/* this.handleClick(this.state.plus) dans une fonction anonyme () => {} fonction flechée */}
         <Button plus={this.state.plus} veillir={()=>{this.handleClick(this.state.plus)}}/>
       </Fragment>
