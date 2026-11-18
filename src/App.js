@@ -28,7 +28,17 @@ class App extends Component{
 
   state = {
     league: ufcLegends,
-    plus: 2
+    plus: 2,
+    isShow : false
+  }
+
+  componentDidMount(){
+    this.setState({league:ufcLegends})
+  }
+
+  handleShow = () =>{
+    const isShow = !this.state.isShow
+    this.setState({isShow:isShow})
   }
 
   handleClick = (nb) => {
@@ -58,6 +68,20 @@ class App extends Component{
         <h1>UFC</h1>
         <h3>Légende du MMA</h3>
         {list}
+        <Membre
+          age="50"
+          nom="McGregor"
+        >
+          {
+            this.state.isShow ? <strong>Je suis le GOAT</strong> : null
+          }
+
+          <button onClick={this.handleShow}>
+            {this.state.isShow ? 'Cacher' : 'Montrer'}
+          </button>
+          
+        </Membre>
+
         {/* this.handleClick(this.state.plus) dans une fonction anonyme () => {} fonction flechée */}
         <Button plus={this.state.plus} veillir={()=>{this.handleClick(this.state.plus)}}/>
       </Fragment>
