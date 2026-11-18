@@ -1,4 +1,6 @@
-const Membre = ({nom, children, age, handleChange, hideName}) => {
+import Button from "./Button";
+
+const Membre = ({nom, children, age, handleChange, hideName, plus, handleClick}) => {
     //console.log(props)
     return ( 
         <>
@@ -6,6 +8,10 @@ const Membre = ({nom, children, age, handleChange, hideName}) => {
             <input type="text" value={nom} onChange={handleChange}/>
             <button onClick={hideName}>X</button>
             { children ? <p>{children}</p> : null} 
+            <Button 
+                plus={plus}
+                vieillir={handleClick}
+            />
         </>
      );
 }

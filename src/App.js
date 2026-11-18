@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import {Component, Fragment} from 'react';
 import Membre from './components/Membre'
-import Button from './components/Button';
+
 
 const ufcLegends = {
   membre1: {
@@ -55,12 +55,12 @@ class App extends Component{
     this.setState({league:league})
   }
 
-  handleClick = (nb) => {
+  handleClick = (id,nb) => {
     // cloner this.state.league
     // en JS pour clone ...
     const league = {...this.state.league}
     //league.membre1.age = league.membre1.age + nb
-    league.membre1.age += nb
+    league[id].age += nb
     //this.setState({league:league})
     this.setState({league})
   }
@@ -73,7 +73,9 @@ class App extends Component{
           age={this.state.league[iteration].age}
           nom={this.state.league[iteration].nom}
           handleChange={(event)=> this.handleChange(event,iteration)}
-          hideName={()=>this.hideName(iteration)} 
+          hideName={()=>this.hideName(iteration)}
+          plus={this.state.plus}
+          handleClick={()=>this.handleClick(iteration,this.state.plus)} 
         />
       )
     })
@@ -84,7 +86,6 @@ class App extends Component{
         <h3>Légende du MMA</h3>
         {list}
         {/* this.handleClick(this.state.plus) dans une fonction anonyme () => {} fonction flechée */}
-        <Button plus={this.state.plus} veillir={()=>{this.handleClick(this.state.plus)}}/>
       </Fragment>
     )
     // return React.createElement('h1',null,'Hello World');
