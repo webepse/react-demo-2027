@@ -41,6 +41,20 @@ class App extends Component{
     this.setState({isShow:isShow})
   }
 
+  handleChange = (event, id) => {
+    const league = {...this.state.league}
+    const nom = event.target.value
+    league[id].nom = nom
+    this.setState({league:league})
+  }
+
+  hideName = (id) => {
+    const league = {...this.state.league}
+    league[id].nom = "X"
+    league[id].age = 0
+    this.setState({league:league})
+  }
+
   handleClick = (nb) => {
     // cloner this.state.league
     // en JS pour clone ...
@@ -58,30 +72,17 @@ class App extends Component{
           key={iteration} 
           age={this.state.league[iteration].age}
           nom={this.state.league[iteration].nom}
+          handleChange={(event)=> this.handleChange(event,iteration)}
+          hideName={()=>this.hideName(iteration)} 
         />
       )
     })
-
 
     return (
       <Fragment>
         <h1>UFC</h1>
         <h3>Légende du MMA</h3>
         {list}
-        <Membre
-          age="50"
-          nom="McGregor"
-        >
-          {
-            this.state.isShow ? <strong>Je suis le GOAT</strong> : null
-          }
-
-          <button onClick={this.handleShow}>
-            {this.state.isShow ? 'Cacher' : 'Montrer'}
-          </button>
-          
-        </Membre>
-
         {/* this.handleClick(this.state.plus) dans une fonction anonyme () => {} fonction flechée */}
         <Button plus={this.state.plus} veillir={()=>{this.handleClick(this.state.plus)}}/>
       </Fragment>
@@ -92,4 +93,3 @@ class App extends Component{
 }
 
 export default App;
-

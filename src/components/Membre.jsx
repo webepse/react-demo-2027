@@ -1,9 +1,11 @@
-const Membre = (props) => {
+const Membre = ({nom, children, age, handleChange, hideName}) => {
     //console.log(props)
     return ( 
         <>
-            <h2 style={{backgroundColor: props.age < 46 ? 'dodgerblue':'crimson', color: 'white'}}>Combattant: {props.nom.toUpperCase()} age: {props.age}</h2>
-            { props.children ? <p>{props.children}</p> : null} 
+            <h2 style={{backgroundColor: age < 46 ? 'dodgerblue':'crimson', color: 'white'}}>Combattant: {nom.toUpperCase()} age: {age}</h2>
+            <input type="text" value={nom} onChange={handleChange}/>
+            <button onClick={hideName}>X</button>
+            { children ? <p>{children}</p> : null} 
         </>
      );
 }
